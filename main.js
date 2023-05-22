@@ -67,10 +67,12 @@ function handleSVGButton(svgButton) {
     editButton.click();
     const intervalContent = setInterval(() => {
       if (svgContent[0]?.querySelector("svg")) {
+        clearInterval(intervalContent);
+        let exit = document.getElementsByClassName("close");
+        console.log(exit);
         navigator.clipboard.writeText(
           svgContent[0].querySelector("svg").outerHTML
         );
-        clearInterval(intervalContent);
       }
     }, duration);
   });
