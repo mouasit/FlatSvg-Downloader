@@ -1,37 +1,65 @@
-let linksIcons = document.querySelectorAll(".link-icon-detail");
+const duration = 100;
+// In search list page
+let listIcons = document.querySelectorAll(".link-icon-detail");
+
+if (listIcons?.length) {
+  listIcons.forEach((e) => {
+    e.addEventListener("click", () => {
+      window.location = e.href;
+    });
+  });
+}
+
+// In edit page
 let svgButton = document.getElementById("download");
 
-linksIcons?.forEach((e) => {
+svgButton
+  ?.querySelectorAll("a")[8]
+  .addEventListener("click", handleSVGButton(svgButton));
+
+// Click pagination button
+
+let paginationButtons = document.querySelectorAll(".pagination-buttons");
+
+paginationButtons[0]?.querySelectorAll("a").forEach((e) => {
   e.addEventListener("click", () => {
-    const intervalSvgButton = setInterval(() => {
-      let svgButton = document.getElementById("download");
-      if (svgButton) {
-        clearInterval(intervalSvgButton);
-        handleSVG();
+    let spinnerInterval = setInterval(() => {
+      let spinner = document.getElementById("pagination-spinner");
+      if (spinner.classList[spinner.classList.length - 1] === "hidden") {
+        clearInterval(spinnerInterval);
+
+        let listIcons = document.querySelectorAll(".link-icon-detail");
+
+        if (listIcons?.length) {
+          listIcons.forEach((e) => {
+            console.log(e);
+            e.addEventListener("click", () => {
+              window.location = e.href;
+            });
+          });
+        }
       }
-    }, 100);
+    }, duration);
   });
 });
 
-svgButton?.querySelectorAll("a")[8].addEventListener("click", handleSVG);
-
-function handleSVG() {
+function handleSVGButton(svgButton) {
+  //Edit button
   let editButton = document.getElementById("detail_edit_icon");
-  let svgButton = document.getElementById("download");
+  // Svg code
   let svgContent = document.getElementsByClassName(
-    "detail__editor__icon-holder icon-holder"
+    "detail__editor__icon-holder"
   );
 
   svgButton.querySelectorAll("a")[8].addEventListener("click", () => {
     editButton.click();
     const intervalContent = setInterval(() => {
-      console.log(svgContent);
       if (svgContent[0]?.querySelector("svg")) {
         navigator.clipboard.writeText(
           svgContent[0].querySelector("svg").outerHTML
         );
         clearInterval(intervalContent);
       }
-    }, 100);
+    }, duration);
   });
 }
