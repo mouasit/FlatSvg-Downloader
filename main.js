@@ -13,6 +13,7 @@ if (listIcons?.length) {
 // In edit page
 let svgButton = document.getElementById("download");
 
+svgButton?.querySelectorAll("a")[8]?.classList.add("to-top");
 svgButton?.querySelectorAll("a")[8]?.querySelector("i")?.remove();
 const spanElement = svgButton?.querySelectorAll("a")[8].querySelector("span");
 if (spanElement) spanElement.textContent = "Copy Svg";
@@ -85,46 +86,6 @@ function handleSVGButton(svgButton) {
           svgContent[0].querySelector("svg").outerHTML
         );
         exit.click();
-
-        // Add toast
-
-        document.body.innerHTML +=
-          "<ul id='notifications-copy' class='notifications'></ul>";
-
-        const notifications = document.getElementById("notifications-copy");
-        const toastDetails = {
-          timer: 5000,
-          success: {
-            icon: "fa-circle-check",
-            text: "Success: This is a success toast.",
-          },
-        };
-
-        const removeToast = (toast) => {
-          toast.classList.add("hide");
-          if (toast.timeoutId) clearTimeout(toast.timeoutId); // Clearing the timeout for the toast
-          setTimeout(() => toast.remove(), 500); // Removing the toast after 500ms
-        };
-
-        const createToast = (id) => {
-          // Getting the icon and text for the toast based on the id passed
-          const { icon, text } = toastDetails[id];
-          const toast = document.createElement("li"); // Creating a new 'li' element for the toast
-          toast.className = `toast ${id}`; // Setting the classes for the toast
-          // Setting the inner HTML for the toast
-          toast.innerHTML = `<div class="column">
-                                 <i class="fa-solid ${icon}"></i>
-                                 <span>${text}</span>
-                              </div>
-                              <i class="fa-solid fa-xmark" onclick="removeToast(this.parentElement)"></i>`;
-          notifications.appendChild(toast); // Append the toast to the notification ul
-          // Setting a timeout to remove the toast after the specified duration
-          toast.timeoutId = setTimeout(
-            () => removeToast(toast),
-            toastDetails.timer
-          );
-        };
-
         createToast("success");
       }
     }, duration);
@@ -150,3 +111,30 @@ function handlePagination(element) {
     }, duration);
   });
 }
+
+// Add toast
+
+let ul = document.createElement("ul");
+ul.id = "notifications-copy";
+document.body.insertBefore(ul, document.body.firstChild);
+
+const removeToast = (toast) => {
+  toast.classList.add("hide");
+  if (toast.timeoutId) clearTimeout(toast.timeoutId);
+  setTimeout(() => toast.remove(), 500);
+};
+
+const createToast = (id) => {
+  const toast = document.createElement("li");
+  const notifications = document.getElementById("notifications-copy");
+  toast.className = `toast ${id}`;
+  toast.innerHTML = `<div>
+                         <i class="icon icon--check"></i>
+                         <span>Success: This is a success toast.</span>
+                      </div>
+                      <i class="icon icon--file" onclick="removeToast(this.parentElement)"></i>`;
+  notifications.appendChild(toast);
+  // toast.timeoutId = setTimeout(() => removeToast(toast), 5000);
+};
+
+createToast("success");
