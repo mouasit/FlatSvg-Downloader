@@ -132,9 +132,9 @@ const createToast = (id) => {
                          <i class="icon icon--check"></i>
                          <span>Svg copied with success.</span>
                       </div>
-                      <i onclick="removeToast(this.parentElement)"></i>`;
+                      <i class="close-icon icon--cross icon--xl" onclick="removeToast(this.parentElement)"></i>`;
   notifications.appendChild(toast);
-  // toast.timeoutId = setTimeout(() => removeToast(toast), 5000);
+  //toast.timeoutId = setTimeout(() => removeToast(toast), 5000);
 };
 
 createToast("success");
