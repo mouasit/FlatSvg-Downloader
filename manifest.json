@@ -18,6 +18,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.flaticon.com/*"],
+      "css": ["toast.css"],
       "js": ["main.js"]
     }
   ]
