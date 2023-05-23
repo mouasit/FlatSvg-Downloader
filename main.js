@@ -127,12 +127,12 @@ const removeToast = (toast) => {
 const createToast = (id) => {
   const toast = document.createElement("li");
   const notifications = document.getElementById("notifications-copy");
-  toast.className = `toast ${id}`;
-  toast.innerHTML = `<div>
+  toast.className = `natifactions-toast ${id}`;
+  toast.innerHTML = `<div class="content-toast">
                          <i class="icon icon--check"></i>
-                         <span>Success: This is a success toast.</span>
+                         <span>Svg copied with success.</span>
                       </div>
-                      <i class="icon icon--file" onclick="removeToast(this.parentElement)"></i>`;
+                      <i onclick="removeToast(this.parentElement)"></i>`;
   notifications.appendChild(toast);
   // toast.timeoutId = setTimeout(() => removeToast(toast), 5000);
 };
