@@ -64,15 +64,27 @@ function handleSVGButton(svgButton) {
   );
 
   svgButton.querySelectorAll("a")[8].addEventListener("click", () => {
+    let closeInterval = setInterval(() => {
+      let closeModalButton = document
+        .getElementById("fi-premium-download-buttons")
+        .getElementsByClassName("button--close")[0];
+      if (closeModalButton) {
+        clearInterval(closeInterval);
+        closeModalButton.click();
+      }
+    }, duration);
+
     editButton.click();
     const intervalContent = setInterval(() => {
       if (svgContent[0]?.querySelector("svg")) {
         clearInterval(intervalContent);
-        let exit = document.getElementsByClassName("close");
-        console.log(exit);
+        let exit = document
+          .getElementById("detail")
+          .getElementsByClassName("close")[0];
         navigator.clipboard.writeText(
           svgContent[0].querySelector("svg").outerHTML
         );
+        exit.click();
       }
     }, duration);
   });
