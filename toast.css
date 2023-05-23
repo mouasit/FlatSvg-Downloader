@@ -11,22 +11,23 @@
   flex-direction: column;
   width: auto;
 }
-#notifications-copy :where(.natifactions-toast) {
+#notifications-copy :where(.notifications-toast) {
   display: flex;
   align-items: center;
 }
-.natifactions-toast {
+.notifications-toast {
   width: 400px;
   position: relative;
   overflow: hidden;
   list-style: none;
   border-radius: 4px;
-  padding: 16px 17px;
+  padding: 15px;
   margin-bottom: 10px;
-  background: var(--light);
+  background: var(--success);
   justify-content: space-between;
   animation: show_toast 0.3s ease forwards;
   align-items: center;
+  color: #fff;
 }
 @keyframes show_toast {
   0% {
@@ -42,7 +43,7 @@
     transform: translateX(-10px);
   }
 }
-#notifications-copy .natifactions-toast.hide {
+.hide-toast {
   animation: hide_toast 0.3s ease forwards;
 }
 @keyframes hide_toast {
@@ -59,29 +60,21 @@
     transform: translateX(calc(100% + 20px));
   }
 }
-.natifactions-toast::before {
-  position: absolute;
-  content: "";
-  height: 3px;
-  width: 100%;
-  bottom: 0px;
-  left: 0px;
-  animation: progress 5s linear forwards;
-}
 
 .content-toast {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  font-weight: 600;
 }
 
 .content-toast i {
-  background-color: var(--success);
+  background-color: hsla(0, 0%, 100%, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 11px;
-  border-radius: 50px;
+  padding: 15px;
+  border-radius: 5px;
   color: var(--light);
   font-size: 13px;
 }
@@ -100,11 +93,6 @@
   font-size: 15px;
 }
 
-@keyframes progress {
-  100% {
-    width: 0%;
-  }
-}
 .success::before,
 .btn#success {
   background: var(--success);
@@ -114,7 +102,7 @@
   #notifications-copy {
     width: 95%;
   }
-  #notifications-copy .natifactions-toast {
+  #notifications-copy .notifications-toast {
     width: 100%;
     font-size: 1rem;
     margin-left: 20px;

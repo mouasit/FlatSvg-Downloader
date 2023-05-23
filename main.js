@@ -116,10 +116,11 @@ function handlePagination(element) {
 
 let ul = document.createElement("ul");
 ul.id = "notifications-copy";
+ul.className="notifications-copy"
 document.body.insertBefore(ul, document.body.firstChild);
 
 const removeToast = (toast) => {
-  toast.classList.add("hide");
+  toast.classList.add("hide-toast");
   if (toast.timeoutId) clearTimeout(toast.timeoutId);
   setTimeout(() => toast.remove(), 500);
 };
@@ -127,14 +128,11 @@ const removeToast = (toast) => {
 const createToast = (id) => {
   const toast = document.createElement("li");
   const notifications = document.getElementById("notifications-copy");
-  toast.className = `natifactions-toast ${id}`;
+  toast.className = `notifications-toast ${id}`;
   toast.innerHTML = `<div class="content-toast">
                          <i class="icon icon--check"></i>
                          <span>Svg copied with success.</span>
-                      </div>
-                      <i class="close-icon icon--cross icon--xl" onclick="removeToast(this.parentElement)"></i>`;
+                      </div>`;
   notifications.appendChild(toast);
-  //toast.timeoutId = setTimeout(() => removeToast(toast), 5000);
+  toast.timeoutId = setTimeout(() => removeToast(toast), 5000);
 };
-
-createToast("success");
