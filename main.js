@@ -54,6 +54,7 @@ newItem.addEventListener("click", () => {
     "detail__editor__icon-holder"
   );
   navigator.clipboard.writeText(svgContent[0].querySelector("svg").outerHTML);
+  createToast("success");
 });
 
 function handleSVGButton(svgButton) {
@@ -116,7 +117,7 @@ function handlePagination(element) {
 
 let ul = document.createElement("ul");
 ul.id = "notifications-copy";
-ul.className="notifications-copy"
+ul.className = "notifications-copy";
 document.body.insertBefore(ul, document.body.firstChild);
 
 const removeToast = (toast) => {
@@ -134,5 +135,5 @@ const createToast = (id) => {
                          <span>Svg copied with success.</span>
                       </div>`;
   notifications.appendChild(toast);
-  toast.timeoutId = setTimeout(() => removeToast(toast), 5000);
+  toast.timeoutId = setTimeout(() => removeToast(toast), 3000);
 };
